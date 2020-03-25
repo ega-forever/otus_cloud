@@ -1,0 +1,49 @@
+version: "3"
+
+services:
+
+  db:
+    image: postgres:9.6
+    environment:
+      POSTGRES_PASSWORD: 123
+      POSTGRES_USER: user
+      POSTGRES_DB: test
+    networks:
+      - otusnet
+
+
+  app:
+    # image: otus/app:1.0.0
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      DB_PORT: 5432
+      DB_DB: test
+      DB_USER: user
+      DB_PASSWORD: 123
+      DB_HOST: db
+      REST_PORT: 3002
+      GQL_INTROSPECTION: 1
+      GQL_PLAYGROUND: 1
+    command: ["./tools/wait.sh", "db:5432", "--", "node", "build/src/index.js"]
+    ports:
+      - 3002:3002
+    networks:
+      - otusnet
+
+  test:
+    # image: otus/app:1.0.0
+    build:
+      context: .
+      dockerfile: Dockerfile_test
+    environment:
+      REST_HOST: app
+      REST_PORT: 3002
+    command: ["./tools/wait.sh", "db:5432", "--", "./tools/wait.sh", "app:3002", "--", "npm", "run", "test"]
+
+    networks:
+      - otusnet
+
+networks:
+  otusnet:
