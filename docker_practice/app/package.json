@@ -13,7 +13,7 @@
    "license": "ISC",
    "bugs": {},
    "dependencies": {
-      "apollo-server-express": "2.9.1",
+      "apollo-server-express": "2.14.2",
       "bluebird": "3.5.5",
       "body-parser": "1.18.3",
       "bunyan": "1.8.12",
