@@ -25,7 +25,7 @@
       "lodash": "4.17.15",
       "pg": "7.4.3",
       "reflect-metadata": "0.1.13",
-      "type-graphql": "^0.17.5",
+      "type-graphql": "^0.17.6",
       "typedi": "0.8.0",
       "typeorm": "0.2.7",
       "typeorm-typedi-extensions": "0.2.1"
